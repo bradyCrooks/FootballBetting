@@ -62,6 +62,7 @@ def GetSeasonSummary(league, season):
     return results
 
 seasons = ['1415', '1516', '1617', '1718']
-summaries = {"E1_" + season: GetSeasonSummary("E1", season) for season in seasons}
+leagues = ['E0', 'E1', 'E2']
+summaries = {league + '_' + season: GetSeasonSummary(league, season) for league in leagues for season in seasons}
 df = pd.concat(summaries.values())
 df.to_csv("SeasonSummaries.csv")
