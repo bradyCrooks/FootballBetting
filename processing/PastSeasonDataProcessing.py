@@ -7,8 +7,8 @@ Created on Tue Mar  5 22:06:09 2019
 
 import pandas as pd
 
-def GetSeasonSummary(league, season):
-    file = league + '_' + season + ".csv"
+def GetSeasonSummary(league, season, directory):
+    file = directory + league + '_' + season + ".csv"
     df = pd.read_csv(file)
     sel_cols = ["HomeTeam", "AwayTeam", "FTR", "FTHG", "FTAG", "HS", "AS", "HST", "AST", "HF", "AF", "HY", "AY", "HR", "AR"]
     df = df[sel_cols]
@@ -61,8 +61,9 @@ def GetSeasonSummary(league, season):
     
     return results
 
-seasons = ['1415', '1516', '1617', '1718']
+seasons = ['1011', '1112', '1213', '1314', '1415', '1516', '1617', '1718']
 leagues = ['E0', 'E1', 'E2']
-summaries = {league + '_' + season: GetSeasonSummary(league, season) for league in leagues for season in seasons}
+d = 'C:\\Users\\brady\\Documents\\FootballBetting\\FootballBetting\\data\\results\\'
+summaries = {league + '_' + season: GetSeasonSummary(league, season, d) for league in leagues for season in seasons}
 df = pd.concat(summaries.values())
-df.to_csv("SeasonSummaries.csv")
+df.to_csv("C:\\Users\\brady\\Documents\\FootballBetting\\FootballBetting\\data\\eos_stats\\SeasonSummaries.csv")
