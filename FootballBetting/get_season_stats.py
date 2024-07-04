@@ -263,7 +263,7 @@ class GetTeamStats(TeamStats):
             
         return self.fixtures
     
-def get_multi_seasons(last_season, num_seasons, season_dir, eos_stats_path):
+def get_multi_seasons(last_season, num_seasons, season_dir, eos_stats_path, league = 'E1'):
     """Create dataset containing fixtures and previous seasons for multiple 
     seasons for the purpose of model building.
     
@@ -272,6 +272,7 @@ def get_multi_seasons(last_season, num_seasons, season_dir, eos_stats_path):
         num_seasons (int): number of seasons to pull together
         season_dir (str): Directory to pull season data from 
         eos_stats_path (str): path to end of seasons stats table
+        league (str): league code
         
     return:
         data (pd.DataFrame): dataframe containing multiple seasons worth of data
@@ -282,7 +283,7 @@ def get_multi_seasons(last_season, num_seasons, season_dir, eos_stats_path):
     data = pd.DataFrame()
     for i in range(num_seasons):
         
-        teamStats = GetTeamStats('E1', season, season_dir, eos_stats_path)
+        teamStats = GetTeamStats(league, season, season_dir, eos_stats_path)
         teamData = teamStats.getFixAndStats()
         
         if season == str(last_season):
